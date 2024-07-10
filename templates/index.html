@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision Support System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            color: #444;
+        }
+
+        h3 {
+            margin-bottom: 40px;
+            color: blue;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: block;
+            width: 100px;
+            padding: 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .text-holder {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <h3>
+                {{generate}}
+                {{info}}
+            </h3>
+        <img src="{{ url_for('static', filename='University_of_Europe_for_Applied_Sciences_logo.png') }}" alt="Example Image" style="max-width: 30%; height: 30%; margin-bottom: 20px;">
+        <h1>Welcome to our Decision Support System</h1>
+        <div class="button-container">
+            <a href="/gendata" class="btn">Generate New Dataset</a>
+            <a href="/showgendata" class="btn">Show Latest Generated Dataset</a>
+            <a href="/setbudget" class="btn">Set Total Budget</a>
+            <a href="/allores" class="btn">Allocate Resource</a>
+            <a href="/visual" class="btn">Graphical View</a>
+        </div>
+    </div>
+</body>
+</html>

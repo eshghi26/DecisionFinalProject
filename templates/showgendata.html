@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Generated Dataset</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        table {
+            width: 60%;
+            margin: 25px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e1f5fe;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generated Dataset</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>School ID</th>
+                <th>Performance Score</th>
+                <th>Student Teacher Ratio</th>
+                <th>Educational Needs Percent</th>
+                <th>Disable Student Percent</th>
+                <th>Tech Access Score</th>
+                <th>Free Reduced Lunch Percent</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in showgen.split('\n')[1:] %}
+                <tr>
+                    {% for cell in line.split() %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
