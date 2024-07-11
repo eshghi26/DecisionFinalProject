@@ -1,23 +1,22 @@
-def normalize_inverse(series):
-    return (series.max() - series) / (series.max() - series.min())
-
-
-def calculate_priority_score(df):
+def rank(data):
     weights = {
-        'Performance_Score': -0.25,
-        'Student_Teacher_Ratio': 0.20,
+        'Academic_Performance_Score': -0.25,
+        'Graduation_Rate': 0.20,
         'Educational_Needs_Percent': 0.15,
         'Disable_Student_Percent': 0.15,
-        'Tech_Access_Score': -0.10,
-        'Free_Reduced_Lunch_Percent': 0.15
+        'Technology_Access_Score': -0.10,
+        'Total_Students': 0.15
     }
 
-    normalized_df = df.copy()
+    def zero_to_one_convertor(factor):
+        return (factor.max() - factor) / (factor.max() - factor.min())
+
+    converted_data = data.copy()
     for column, weight in weights.items():
         if weight < 0:
-            normalized_df[column] = normalize_inverse(df[column])
+            converted_data[column] = zero_to_one_convertor(data[column])
         else:
-            normalized_df[column] = (df[column] - df[column].min()) / (df[column].max() - df[column].min())
+            converted_data[column] = (data[column] - data[column].min()) / (data[column].max() - data[column].min())
 
-    normalized_df['Priority_Score'] = sum(normalized_df[column] * abs(weight) for column, weight in weights.items())
-    return normalized_df['Priority_Score']
+    converted_data['rank_score'] = sum(converted_data[column] * abs(weight) for column, weight in weights.items())
+    return converted_data['rank_score']
