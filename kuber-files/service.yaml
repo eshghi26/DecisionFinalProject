@@ -1,0 +1,11 @@
+apiVersion: v1
+Kind: Service
+metadata:
+  name: decisionservice
+spec:
+  ports:
+    - port: 5000
+      targetPort: decision-port
+      protocol: TCP
+  selector:
+    app: decisionpod
