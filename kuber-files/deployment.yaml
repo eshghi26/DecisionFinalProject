@@ -9,7 +9,7 @@ spec:
     matchlabels:
       app: decisiondeploy
   replicas: 2
-  template: #Pod definition
+  template: # Pod definition
     metadata:
       labels:
         app: decisionpod
@@ -20,50 +20,5 @@ spec:
           ports:
             - name: decision-port
               containerport: 5000
-          volumeMounts:
-            - name: local-storage
-            mountPath: /app
       nodeSelector:
-        role: worker
-      volumes:
-        - name: local-storage
-          persistentVolumeClaim:
-          claimName: my-local-pvc
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: my-local-pv
-spec:
-  capacity:
-    storage: 10Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /home/vagrant/decisionfile
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-            - worker01
-            - worker02
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: my-local-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-storage
-  resources:
-    requests:
-      storage: 10Gi
+        disktype: ssd # Run this command for each worker kubectl label nodes worker01 disktype=ssd
