@@ -1,12 +1,13 @@
 apiVersion: v1
-Kind: Service
+kind: Service
 metadata:
   name: decisionservice
 spec:
-  ports:
-    - port: 5000
-      targetPort: decision-port
-      protocol: TCP
   selector:
     app: decisionpod
-  type: ClusterIP
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+      nodePort: 30001 # App will be accessable from http://Master_Node_IP:300001
