@@ -1,4 +1,4 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: decisiondeploy
@@ -6,8 +6,8 @@ metadata:
     app: decisiondeploy
 spec:
   selector:
-    matchlabels:
-      app: decisiondeploy
+    matchLabels:
+      app: decisionpod
   replicas: 2
   template: # Pod definition
     metadata:
@@ -19,6 +19,6 @@ spec:
           image: eshghi26/decisionfinal:latest
           ports:
             - name: decision-port
-              containerport: 5000
+              containerPort: 5000
       nodeSelector:
         disktype: ssd # Run this command for each worker kubectl label nodes worker01 disktype=ssd
