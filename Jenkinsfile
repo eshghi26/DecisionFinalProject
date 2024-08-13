@@ -40,17 +40,15 @@ pipeline {
 
         stage('Delete image from Jenkins') {
             steps {
-                sh "docker rmi $DOCKERHUB_REPO:V$BUILD_NUMBER"
+                sh "docker rmi $DOCKERHUB_REPO:$BUILD_NUMBER"
             }
         }
 
         stage('Deploy to Kubernetes') {
             agent {label KOPS}
-            steps {
-                sh "git clone git@github.com:eshghi26/DecisionFinalProject.git"
-                sh "cd DecisionFinalProject"
+                steps {
                 sh "helm upgrade --install --force decision-stack helm/decisioncharts"
-            }
+                }
         } 
     }
 
