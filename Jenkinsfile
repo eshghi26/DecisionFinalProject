@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             agent {label 'KOPS'}
                 steps {
-                sh "helm upgrade --install --force decision-stack helm/decisioncharts"
+                sh "sudo helm upgrade --install --force decision-stack helm/decisioncharts"
                 }
         } 
     }
