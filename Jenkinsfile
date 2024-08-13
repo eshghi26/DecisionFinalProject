@@ -8,8 +8,6 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhubcred'
         DOCKERHUB_REPO = 'eshghi26/decisionfinal'
-        # DOCKER_SERVER = '192.168.56.17'
-        # DOCKER_USER = 'vagrant'
     }
 
     stages {
@@ -24,7 +22,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    # docker.build("${env.DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
                     dockerImage = docker.build( DOCKERHUB_REPO + ":$BUILD_NUMBER", "./")
                 }
             }
@@ -34,7 +31,6 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
-                        # docker.image("${env.DOCKERHUB_REPO}:${env.BUILD_NUMBER}").push()
                         dockerImage.push("V$BUILD_NUMBER")
                         dockerImage.push('latest')
                     }
