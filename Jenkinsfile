@@ -30,7 +30,7 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                         dockerImage.push("V$BUILD_NUMBER")
                         dockerImage.push('latest')
                     }
@@ -40,13 +40,15 @@ pipeline {
 
         stage('Delete image from Jenkins') {
             steps {
-                sh "docker rmi $DOCKERHUB_REPO:$BUILD_NUMBER"
+                sh "docker rmi $DOCKERHUB_REPO:V$BUILD_NUMBER"
             }
         }
 
         stage('Deploy to Kubernetes') {
             agent {label KOPS}
             steps {
+                sh "git clone git@github.com:eshghi26/DecisionFinalProject.git"
+                sh "cd DecisionFinalProject"
                 sh "helm upgrade --install --force decision-stack helm/decisioncharts"
             }
         } 
