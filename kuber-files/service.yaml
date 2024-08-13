@@ -5,9 +5,10 @@ metadata:
 spec:
   selector:
     app: decisionpod
-  type: NodePort
+  # type: NodePort # For NodePort Service
+  type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 80
+      port: 80 # App will be accessable on the port 80 of External IP
       targetPort: 5000
-      nodePort: 30001 # App will be accessable from http://Master_Node_IP:300001
+      # nodePort: 30001 # App will be accessable from http://Master_Node_IP:300001 for NodePort Service
