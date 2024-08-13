@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Delete image from Jenkins' {
+        stage('Delete image from Jenkins') {
             steps {
                 sh "docker rmi $DOCKERHUB_REPO:$BUILD_NUMBER"
             }
