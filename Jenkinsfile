@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build( DOCKERHUB_REPO + "V:$BUILD_NUMBER", "./")
+                    dockerImage = docker.build( DOCKERHUB_REPO + ":V$BUILD_NUMBER", "./")
                 }
             }
         }
@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             agent {label 'KOPS'}
                 steps {
-                sh "sudo helm upgrade --install --force decision-stack helm/decisioncharts"
+                sh "helm upgrade --install --force decision-stack helm/decisioncharts"
                 }
         } 
     }
