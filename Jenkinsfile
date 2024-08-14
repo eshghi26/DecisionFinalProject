@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build( DOCKERHUB_REPO + ":$BUILD_NUMBER", "./")
+                    dockerImage = docker.build( DOCKERHUB_REPO + "V:$BUILD_NUMBER", "./")
                 }
             }
         }
