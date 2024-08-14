@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             agent {label 'KOPS'}
                 steps {
-                sh "sudo helm upgrade --install --force decision-stack helm/decisioncharts"
+                sh "sudo helm upgrade --install --force decision-stack helm/decisioncharts" # Put this command in sudoers file jenkins ALL=(ALL) NOPASSWD: /usr/local/bin/helm
                 }
         } 
     }
