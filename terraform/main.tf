@@ -66,3 +66,9 @@ output "kubernetes_cluster_endpoint" {
 output "kubernetes_cluster_master_version" {
   value = google_container_cluster.primary.master_version
 }
+
+# For executing
+# terraform init
+# terraform validate
+# terraform plan -out=tfplan
+# terraform apply "tfplan"
